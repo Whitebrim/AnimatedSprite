@@ -39,7 +39,7 @@ Contacts
 <p align="left">
 <a href="https://tg.brim.ml" target="_blank"><img align="center" src="https://telegram.org/img/t_logo.svg" alt="tg.brim.ml" height="40" width="40" /></a>
 <a href="https://discordapp.com/users/241961053578199040" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/discord.svg" alt="Whitebrim#4444" height="45" width="45" /></a>
-<a href="mailto:white@brim.ml" target="_blank"><img align="center" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiNmZmRhM2UiIGQ9Ik01NiA0MDIuNjY3aDQwMFYxMDkuMzMzSDU2eiIvPjxwYXRoIGZpbGw9IiNmYzAiIGQ9Ik0yNTYgMTgyLjY2N2wtMjAwIDIyMGg0MDB6Ii8+PHBhdGggZD0iTTQ1NiAxMDkuMzMzTDI3Ni44NDggMjg0LjExNmMtMTEuNjc1IDExLjQtMzAuMDIgMTEuNC00MS42OTYgMEw1NiAxMDkuMzMzaDQwMHoiIGZpbGw9IiNmMzMiLz48L2c+PC9zdmc+" alt="white@brim.ml" height="40" width="40"></a>
+<a href="mailto:white@brim.ml" target="_blank"><img align="center" src="https://yastatic.net/iconostasis/_/ZPJ8fJU3QLcrqa5E2fUpDDqmgGs.svg" alt="white@brim.ml" height="40" width="40"></a>
 </p>
 
 
