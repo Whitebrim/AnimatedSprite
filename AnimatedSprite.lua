@@ -6,6 +6,7 @@
 -----------------------------------------------
 
 -- You can find examples and docs at https://github.com/Whitebrim/AnimatedSprite/wiki
+-- Comments use EmmyLua style
 
 import 'CoreLibs/object'
 import 'CoreLibs/sprites'
