@@ -433,16 +433,17 @@ function AnimatedSprite:updateAnimation()
 		self._ticks += 1
 		if ((self._ticks - self._previousTicks) >= self.states[self.currentState].tickStep) then
 			local state = self.states[self.currentState]
-			processAnimation(self)
-			drawFrame(self)
-			self._previousTicks += state.tickStep
 			local loop = state.loop
 			local loopsFinished = self._loopsFinished
 			if (type(loop) == "number" and loop <= loopsFinished or 
 				type(loop) == "boolean" and not loop and loopsFinished >= 1 or
 				forcedSwitchOnLoop == loopsFinished) then
 				self:forceNextAnimation(state, true)
+				return
 			end
+			processAnimation(self)
+			drawFrame(self)
+			self._previousTicks += state.tickStep
 		end
 	end
 end
