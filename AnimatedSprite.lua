@@ -449,7 +449,5 @@ function AnimatedSprite:updateAnimation()
 end
 
 function AnimatedSprite:update()
-	if (self.alive) then
-		self:updateAnimation()
-	end
+	self:updateAnimation()
 end
