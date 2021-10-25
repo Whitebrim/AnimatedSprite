@@ -261,8 +261,9 @@ end
 ---@param params? table See examples
 ---@param animate? boolean If `True`, then the animation of this state will start immediately after. Default: `False`
 function AnimatedSprite:addState(name, startFrame, endFrame, params, animate)
+	params = params or {}
 	params.firstFrameIndex = startFrame or 1
-	params.framesCount = endFrame
+	params.framesCount = endFrame and (endFrame - params.firstFrameIndex + 1) or nil
 	params.name = name
 
 	addState(self, params)
