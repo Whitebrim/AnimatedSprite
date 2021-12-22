@@ -158,9 +158,9 @@ local function addState(self, params)
 	state.name = params.name
 	if (params.frames ~= nil) then
 		state["frames"] = params.frames -- Custom animation for non-sequential frames from the imagetable
-		params.framesCount = params.framesCount and params.framesCount or #params.frames
+		params.framesCount = params.framesCount or #params.frames
 		if (type(params.firstFrameIndex) ~= "string") then
-			params.firstFrameIndex = params.firstFrameIndex and params.firstFrameIndex or 1
+			params.firstFrameIndex = params.firstFrameIndex or 1
 		end
 	end
 	if (type(params.firstFrameIndex) == "string") then
@@ -198,6 +198,16 @@ end
 ---@return table config You can use it in `setStates(states)`
 function AnimatedSprite.loadStates(path)
 	return assert(json.decodeFile(path), "Requested JSON parse failed. Path: " .. path)
+end
+
+---Returns imagetable frame index that is currently displayed
+---@return integer Current frame index
+function AnimatedSprite:getCurrentFrameIndex()
+	if (self.currentState and self.states[self.currentState].frames) then
+		return self.states[self.currentState].frames[self._currentFrame]
+	else
+		return self._currentFrame
+	end
 end
 
 ---Returns reference to the current states
@@ -306,12 +316,12 @@ function AnimatedSprite:forceNextAnimation(instant)
 	
 	if (instant) then
 		forcedSwitchOnLoop = nil
+		state.onAnimationEndEvent(self)
 		if (state.nextAnimation) then
-			self:changeState(state.nextAnimation, false)
+			self:changeState(state.nextAnimation)
 		else
 			self:stopAnimation()
 		end
-		state.onAnimationEndEvent(self)
 	else
 		forcedSwitchOnLoop = self._loopsFinished + 1
 	end
