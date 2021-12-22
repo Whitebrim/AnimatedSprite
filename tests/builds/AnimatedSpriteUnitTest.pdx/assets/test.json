@@ -1,0 +1,58 @@
+[
+	{
+		"name":"default",
+		"tickStep": 3
+	},
+	{
+		"name":"run",
+		"firstFrameIndex":1,
+		"framesCount":5,
+		"yoyo": true
+	},
+	{
+		"name":"jump",
+		"firstFrameIndex": "run",
+		"framesCount":3,
+		"nextAnimation": "jump top"
+	},
+	{
+		"name":"jump top",
+		"firstFrameIndex":"jump",
+		"framesCount":1,
+        "loop":2,
+		"nextAnimation": "fall"
+	},
+	{
+		"name":"fall",
+		"firstFrameIndex":"jump top",
+		"framesCount":2,
+		"tickStep":2,
+		"loop":false
+	},
+	{
+		"name":"landing",
+		"firstFrameIndex":"fall",
+		"framesCount":2,
+		"tickStep":4,
+		"nextAnimation": "run"
+	},
+	{
+		"name":"sit down",
+		"firstFrameIndex":"landing",
+		"framesCount":3,
+		"tickStep": 2,
+		"nextAnimation": "stand up"
+	},
+	{
+		"name":"stand up",
+		"firstFrameIndex":"landing",
+		"framesCount":3,
+		"reverse": true,
+		"loop":false,
+		"nextAnimation": "run"
+	},
+	{
+		"name":"random",
+        "frames": [1, 2, 3, 7, 8, 13, 14, 15]
+	}
+]

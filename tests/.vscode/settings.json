@@ -1,0 +1,12 @@
+{
+  "Lua.runtime.version": "Lua 5.4",
+  "Lua.diagnostics.disable": [
+    "undefined-global",
+    "lowercase-global",
+    "unused-function"
+  ],
+  "Lua.diagnostics.globals": ["playdate", "import"],
+  "Lua.workspace.library": {
+    "C:\\Program Files (x86)\\Playdate 1.4.0\\CoreLibs": true
+  }
+}
