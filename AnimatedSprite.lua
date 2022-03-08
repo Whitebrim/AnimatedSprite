@@ -315,15 +315,17 @@ function AnimatedSprite:forceNextAnimation(instant)
 	local state = self.states[self.currentState]
 	
 	if (instant) then
-		forcedSwitchOnLoop = nil
+		self.forcedSwitchOnLoop = nil
 		state.onAnimationEndEvent(self)
-		if (state.nextAnimation) then
-			self:changeState(state.nextAnimation)
-		else
-			self:stopAnimation()
+		if (state.name == self.currentState) then -- If state was changed during the event then return
+			if (state.nextAnimation) then
+				self:changeState(state.nextAnimation)
+			else
+				self:stopAnimation()
+			end
 		end
 	else
-		forcedSwitchOnLoop = self._loopsFinished + 1
+		self.forcedSwitchOnLoop = self._loopsFinished + 1
 	end
 end
 
@@ -446,8 +448,8 @@ function AnimatedSprite:updateAnimation()
 			local loopsFinished = self._loopsFinished
 			if (type(loop) == "number" and loop <= loopsFinished or 
 				type(loop) == "boolean" and not loop and loopsFinished >= 1 or
-				forcedSwitchOnLoop == loopsFinished) then
-				self:forceNextAnimation(state, true)
+				self.forcedSwitchOnLoop == loopsFinished) then
+				self:forceNextAnimation(true)
 				return
 			end
 			processAnimation(self)
