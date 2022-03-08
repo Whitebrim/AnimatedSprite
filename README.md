@@ -33,6 +33,11 @@ Add this line to the playdate.update() function if you haven't already.
 playdate.graphics.sprite.update()
 ```
 
+Performance
+===========
+  
+![AnimatedSpriteDiagram](https://user-images.githubusercontent.com/23287829/157312624-b2ee8dc7-f7b8-46cf-a79a-3ed2cbda6ec9.png)
+
 Contacts
 ========
 
@@ -41,7 +46,6 @@ Contacts
 <a href="https://discordapp.com/users/241961053578199040" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/discord.svg" alt="Whitebrim#4444" height="45" width="45" /></a>
 <a href="mailto:white@brim.ml" target="_blank"><img align="center" src="https://yastatic.net/iconostasis/_/ZPJ8fJU3QLcrqa5E2fUpDDqmgGs.svg" alt="white@brim.ml" height="40" width="40"></a>
 </p>
-
 
 License
 =======
