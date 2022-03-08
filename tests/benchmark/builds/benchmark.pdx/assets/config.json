@@ -1,0 +1,31 @@
+[
+	{
+		"name":"default",
+		"tickStep": 2
+	},
+	{
+		"name":"idle",
+		"firstFrameIndex":1,
+		"framesCount":1,
+        "loop":4,
+        "nextAnimation": "jump"
+	},
+	{
+		"name":"jump",
+		"firstFrameIndex": "idle",
+		"framesCount":8,
+		"nextAnimation": "jump top"
+	},
+	{
+		"name":"jump top",
+		"firstFrameIndex":"jump",
+		"framesCount":2,
+        "nextAnimation": "fall"
+	},
+	{
+		"name":"fall",
+		"firstFrameIndex":"jump top",
+		"framesCount":5,
+		"loop":false
+	}
+]
