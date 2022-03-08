@@ -1,6 +1,6 @@
 import 'luaunit/playdate_luaunit_fix'
 import 'luaunit/luaunit'
-import '../../AnimatedSprite.lua'
+import '../../../AnimatedSprite.lua'
 import 'tests'
 
 -- turns off updating
