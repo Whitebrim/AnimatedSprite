@@ -35,6 +35,12 @@ playdate.graphics.sprite.update()
 
 Performance
 ===========
+
+Because the performance of the console is much lower than the simulator, I did tests on a real hardware, so you had an idea of real performance.  
+Test environment configuration ([benchmark link](/tests/benchmark/source/)):  
+* One preloaded tilemap, containing 16 24x24 images with alpha (96x96 atlas).
+* One preloaded json config for finite state machine, containing 4 states, 1 subscription on event.
+* Animated every second frame  
   
 ![AnimatedSpriteDiagram](https://user-images.githubusercontent.com/23287829/157312624-b2ee8dc7-f7b8-46cf-a79a-3ed2cbda6ec9.png)
 
