@@ -27,7 +27,7 @@ function AnimatedSprite:init(imagetable, states, animate)
 	
 	---@type table
 	self.imagetable = imagetable
-	assert( self.imagetable )
+	assert(self.imagetable, "Imagetable is nil. Check if it was loaded correctly.")
 
 	self:add()
 
@@ -290,36 +290,41 @@ end
 
 ---Changes current state to an existing state
 ---@param name string New state name
----@param instant? boolean If `False`, then the change will be performed after the last frame of this loop iteration. Default: `True`
-function AnimatedSprite:changeState(name, instant)
+---@param play? boolean If new animation should be played right away. Default: `True`
+function AnimatedSprite:changeState(name, play)
 	if (name == self.currentState) then
 		return
 	end
-	local instant = type(instant) == "nil" and true or instant
+	local play = type(play) == "nil" and true or play
 	local state = self.states[name]
-	assert (state)
+	assert (state, "There's no state named \""..name.."\".")
 	self.currentState = name
 	self._currentFrame = 0 -- purposely
 	self._loopsFinished = 0
 	self._currentYoyoDirection = true
 	state.onStateChangedEvent(self)
-	if (instant) then
+	if (play) then
 		self:playAnimation()
 	end
 end
 
 ---Force to move animation state machine to the next state
 ---@param instant? boolean If `False` change will be performed after the final frame of this loop iteration. Default: `True`
-function AnimatedSprite:forceNextAnimation(instant)
+---@param state? string Name of the state to change to. If not provided, animator will try to change to the next animation, else stop the animation.
+function AnimatedSprite:forceNextAnimation(instant, state)
 	local instant = type(instant) == "nil" and true or instant
-	local state = self.states[self.currentState]
+	local currentState = self.states[self.currentState]
+	self.forcedState = state
 	
 	if (instant) then
 		self.forcedSwitchOnLoop = nil
-		state.onAnimationEndEvent(self)
-		if (state.name == self.currentState) then -- If state was changed during the event then return
-			if (state.nextAnimation) then
-				self:changeState(state.nextAnimation)
+		currentState.onAnimationEndEvent(self)
+		if (currentState.name == self.currentState) then -- If state was not changed during the event then proceed
+			if (type(self.forcedState) == "string") then
+				self:changeState(self.forcedState)
+				self.forcedState = nil
+			elseif (currentState.nextAnimation) then
+				self:changeState(currentState.nextAnimation)
 			else
 				self:stopAnimation()
 			end
@@ -332,7 +337,7 @@ end
 ---Sets default state.
 ---@param name string Name of an existing state
 function AnimatedSprite:setDefaultState(name)
-	assert (self.states[name])
+	assert (self.states[name], "State name is nil.")
 	self.defaultState = name
 end
 
