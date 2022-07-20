@@ -22,11 +22,11 @@ Animated sprites library for the **[PlayDate]**.
 
 *How the sprites class has been extended:*
 
-- **Finite State Machines**
+- **Sprite animations**
 
-- **JSON Loading**
+- **Finite State Machine**
 
-- **Animations**
+- **JSON Configuration**
 
 <br>
 <br>
