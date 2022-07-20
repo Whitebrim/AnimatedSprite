@@ -20,7 +20,7 @@ Animated sprites library for **[PlayDate]**.
 
 ## Features
 
-*How the sprites class has been extended.*
+*How the sprites class has been extended:*
 
 - **Finite State Machines**
 
@@ -89,6 +89,6 @@ sprite:playAnimation()
 
 
 [Button Telegram]: https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logoColor=white&logo=Telegram
-[Button Discord]: https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logoColor=white&logo=Discord
+[Button Discord]: https://img.shields.io/badge/-Whitebrim%234444-5865F2?style=for-the-badge&logoColor=white&logo=Discord
 [Button Mail]: https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logoColor=white&logo=Gmail
 
