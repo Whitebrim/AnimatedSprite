@@ -1,7 +1,7 @@
 
 # AnimatedSprite   [![Badge License]][License]
 
-Animated sprites library for **[PlayDate]**.
+Animated sprites library for the **[PlayDate]**.
 
 <br>
 <br>
@@ -33,7 +33,7 @@ Animated sprites library for **[PlayDate]**.
 
 ## Showcase
 
-*A small example how you could use it.*
+*A small example how you could use it:*
 
 ```lua
 import 'AnimatedSprite.lua'
