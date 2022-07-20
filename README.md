@@ -1,64 +1,94 @@
-# AnimatedSprite
-Sprite class extension that covers animations, finite state machine and json loading. Made for Playdate.
 
-Quick Look
-==========
+# AnimatedSprite   [![Badge License]][License]
+
+Animated sprites library for **[PlayDate]**.
+
+<br>
+<br>
+<br>
+
+<div align = center>
+
+[![Button Installation]][Install]   
+[![Button Documentation]][Wiki]   
+[![Button Performance]][Performance]
+
+</div>
+
+<br>
+<br>
+
+## Features
+
+*How the sprites class has been extended.*
+
+- **Finite State Machines**
+
+- **JSON Loading**
+
+- **Animations**
+
+<br>
+<br>
+
+## Showcase
+
+*A small example how you could use it.*
 
 ```lua
-import "AnimatedSprite.lua"
+import 'AnimatedSprite.lua'
 
-imagetable = playdate.graphics.imagetable.new("path") -- Loading imagetable from the disk
-sprite = AnimatedSprite.new(imagetable) -- Creating AnimatedSprite instance
-sprite:addState("idle", 1, 5, {tickStep = 2}) -- Adding custom animation state (Optional)
-sprite:playAnimation() -- Playing the animation
+-- Loading imagetable from the disk
+imagetable = playdate.graphics.imagetable.new('path')
+
+-- Creating an AnimatedSprite instance
+sprite = AnimatedSprite.new(imagetable)
+
+-- Adding custom a animation state (Optional)
+sprite:addState('idle',1,5,{ tickStep = 2 })
+
+-- Playing the animation
+sprite:playAnimation()
 ```
 
-Documentation
-=============
+<br>
+<br>
 
-See the [**github wiki page**](https://github.com/Whitebrim/AnimatedSprite/wiki) for examples & documentation.
+## Contacts
 
-Installation
-============
+[![Button Telegram]][Telegram]   
+[![Button Discord]][Discord]   
+[![Button Mail]][Mail]
 
-Just copy the `AnimatedSprite.lua` file wherever you want it (for example to a libraries/ folder). Then write this in `main.lua` file (change path to your path):
+<br>
 
-```lua
-import "AnimatedSprite.lua"
-```
 
-Add this line to the playdate.update() function if you haven't already.
+<!----------------------------------------------------------------------------->
 
-```lua
-playdate.graphics.sprite.update()
-```
+[Telegram]: https://tg.brim.ml
+[Playdate]: https://play.date/
+[Discord]: https://discordapp.com/users/241961053578199040
+[Wiki]: https://github.com/Whitebrim/AnimatedSprite/wiki
+[Mail]: mailto:white@brim.ml
 
-Performance
-===========
+[Performance]: Documentation/Performance.md
+[Install]: Documentation/Installation.md
+[License]: LICENSE
 
-Because the performance of the console is much lower than the simulator, I did tests on a real hardware, so you had an idea of real performance.  
-Test environment configuration ([benchmark link](/tests/benchmark/source/)):  
-* One preloaded tilemap, containing 16 24x24 images with alpha (96x96 atlas).
-* One preloaded json config for finite state machine, containing 4 states, 1 subscription on event.
-* Animated every second frame  
-  
-![AnimatedSpriteDiagram](https://user-images.githubusercontent.com/23287829/157312624-b2ee8dc7-f7b8-46cf-a79a-3ed2cbda6ec9.png)
 
-Contacts
-========
+<!----------------------------------[ Badges ]--------------------------------->
 
-<p align="left">
-<a href="https://tg.brim.ml" target="_blank"><img align="center" src="https://telegram.org/img/t_logo.svg" alt="tg.brim.ml" height="40" width="40" /></a>
-<a href="https://discordapp.com/users/241961053578199040" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/discord.svg" alt="Whitebrim#4444" height="45" width="45" /></a>
-<a href="mailto:white@brim.ml" target="_blank"><img align="center" src="https://yastatic.net/iconostasis/_/ZPJ8fJU3QLcrqa5E2fUpDDqmgGs.svg" alt="white@brim.ml" height="40" width="40"></a>
-</p>
+[Badge License]: https://img.shields.io/badge/License-MIT-ac8b11.svg?style=for-the-badge&labelColor=yellow
 
-License
-=======
 
-AnimatedSprite is distributed under the MIT license.
+<!---------------------------------[ Buttons ]--------------------------------->
 
-Trademarks
-==========
+[Button Documentation]: https://img.shields.io/badge/Documentation-0099E5?style=for-the-badge&logoColor=white&logo=GitBook
+[Button Installation]: https://img.shields.io/badge/Installation-EF2D5E?style=for-the-badge&logoColor=white&logo=DocuSign
+[Button Performance]: https://img.shields.io/badge/Performance-428813?style=for-the-badge&logoColor=white&logo=GoogleAnalytics
 
-[Playdate](https://play.date/) is a trademark of [Panic](https://panic.com/)
+
+[Button Telegram]: https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logoColor=white&logo=Telegram
+[Button Discord]: https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logoColor=white&logo=Discord
+[Button Mail]: https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logoColor=white&logo=Gmail
+
