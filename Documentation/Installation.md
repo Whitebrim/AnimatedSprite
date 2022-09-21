@@ -5,7 +5,22 @@
 
 <br>
 
-## Steps
+#### Using toybox.py
+
+You can add it to your **Playdate** project by installing [**toybox.py**](https://toyboxpy.io), going to your project folder in a Terminal window and typing:
+
+```console
+toybox add Whitebrim/AnimatedSprite
+toybox update
+```
+
+Then, if your code is in the `source` folder, just import the following:
+
+```lua
+import '../toyboxes/toyboxes.lua'
+```
+
+#### Manually
 
 1.  Download the [`AnimatedSprite.lua`][Library] file.
 
@@ -30,8 +45,10 @@
     ```
     
     <br>
-    
-5.  If missing, add the following function <br>
+
+### Update your code
+
+If missing, add the following function <br>
     to your `playdate.update()` function:
     
     ```lua
