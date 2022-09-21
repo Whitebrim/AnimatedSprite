@@ -447,8 +447,9 @@ end
 function AnimatedSprite:updateAnimation()
 	if (self._enabled) then
 		self._ticks += 1
-		if ((self._ticks - self._previousTicks) >= self.states[self.currentState].tickStep) then
+		while ((self._ticks - self._previousTicks) >= self.states[self.currentState].tickStep) do
 			local state = self.states[self.currentState]
+			self._previousTicks += state.tickStep
 			local loop = state.loop
 			local loopsFinished = self._loopsFinished
 			if (type(loop) == "number" and loop <= loopsFinished or 
@@ -458,9 +459,9 @@ function AnimatedSprite:updateAnimation()
 				return
 			end
 			processAnimation(self)
-			drawFrame(self)
-			self._previousTicks += state.tickStep
 		end
+		drawFrame(self)
+		--self._previousTicks = self._ticks
 	end
 end
 
