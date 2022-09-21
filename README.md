@@ -1,5 +1,6 @@
 
-# AnimatedSprite   [![Badge License]][License]
+# AnimatedSprite
+[![Badge License]][License] [![Toybox Compatible](https://img.shields.io/badge/toybox.py-compatible-brightgreen?style=for-the-badge)](https://toyboxpy.io) [![Latest Version](https://img.shields.io/github/v/tag/Whitebrim/AnimatedSprite?style=for-the-badge)](https://github.com/Whitebrim/AnimatedSprite/tags)
 
 Animated sprites library for the **[PlayDate]**.
 
