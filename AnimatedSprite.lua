@@ -24,7 +24,7 @@ end
 
 function AnimatedSprite:init(imagetable, states, animate)
 	AnimatedSprite.super.init(self)
-	
+
 	---@type table
 	self.imagetable = imagetable
 	assert(self.imagetable, "Imagetable is nil. Check if it was loaded correctly.")
@@ -91,7 +91,7 @@ end
 ---Start/resume the animation  
 ---If `currentState` is nil then `defaultState` will be choosen as current
 function AnimatedSprite:playAnimation()
-	
+
 	local state = self.states[self.currentState]
 
 	if (type(self.currentState) == 'nil') then
@@ -239,7 +239,7 @@ function AnimatedSprite:setStates(states, animate, defaultState)
 			end
 		end
 	end
-	
+
 	if (statesCount == 0) then
 		proceedState(states)
 		if (defaultState) then
@@ -295,7 +295,7 @@ function AnimatedSprite:changeState(name, play)
 	if (name == self.currentState) then
 		return
 	end
-	local play = type(play) == "nil" and true or play
+	play = type(play) == "nil" and true or play
 	local state = self.states[name]
 	assert (state, "There's no state named \""..name.."\".")
 	self.currentState = name
@@ -312,10 +312,10 @@ end
 ---@param instant? boolean If `False` change will be performed after the final frame of this loop iteration. Default: `True`
 ---@param state? string Name of the state to change to. If not provided, animator will try to change to the next animation, else stop the animation.
 function AnimatedSprite:forceNextAnimation(instant, state)
-	local instant = type(instant) == "nil" and true or instant
+	instant = type(instant) == "nil" and true or instant
 	local currentState = self.states[self.currentState]
 	self.forcedState = state
-	
+
 	if (instant) then
 		self.forcedSwitchOnLoop = nil
 		currentState.onAnimationEndEvent(self)
@@ -451,7 +451,7 @@ function AnimatedSprite:updateAnimation()
 			local state = self.states[self.currentState]
 			local loop = state.loop
 			local loopsFinished = self._loopsFinished
-			if (type(loop) == "number" and loop <= loopsFinished or 
+			if (type(loop) == "number" and loop <= loopsFinished or
 				type(loop) == "boolean" and not loop and loopsFinished >= 1 or
 				self.forcedSwitchOnLoop == loopsFinished) then
 				self:forceNextAnimation(true)
