@@ -36,7 +36,7 @@
 1.  You can install this library to your Playdate project via [**toybox.py**](https://toyboxpy.io), by going to your project folder in a Terminal window and typing:
 
     ```console
-    toybox add Whitebrim/AnimatedSprite
+    toybox add AnimatedSprite
     toybox update
     ```
 
