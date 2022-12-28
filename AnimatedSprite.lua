@@ -122,6 +122,11 @@ function AnimatedSprite:pauseAnimation()
 	self._enabled = false
 end
 
+---Play the animation without resetting
+function AnimatedSprite:resumeAnimation()
+	self._enabled = true
+end
+
 ---Play/Pause animation based on current state
 function AnimatedSprite:toggleAnimation()
 	if (self._enabled) then
