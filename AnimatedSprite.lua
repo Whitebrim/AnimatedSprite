@@ -132,7 +132,7 @@ function AnimatedSprite:toggleAnimation()
 	if (self._enabled) then
 		self:pauseAnimation()
 	else
-		self:playAnimation()
+		self:resumeAnimation()
 	end
 end
 
