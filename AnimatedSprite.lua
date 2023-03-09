@@ -163,10 +163,8 @@ local function addState(self, params)
 	state.name = params.name
 	if (params.frames ~= nil) then
 		state["frames"] = params.frames -- Custom animation for non-sequential frames from the imagetable
-		params.framesCount = params.framesCount or #params.frames
-		if (type(params.firstFrameIndex) ~= "string") then
-			params.firstFrameIndex = params.firstFrameIndex or 1
-		end
+		params.firstFrameIndex = 1
+		params.framesCount = #params.frames
 	end
 	if (type(params.firstFrameIndex) == "string") then
 		local thatState = self.states[params.firstFrameIndex]
