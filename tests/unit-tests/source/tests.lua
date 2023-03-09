@@ -224,6 +224,11 @@ function TestInit:test9()
     luaunit.assertEquals(self.sprite.states.run.onFrameChangedEvent, onFrameChangedEvent)
 end
 
+function TestInit:test10()
+    self.sprite = AnimatedSprite.new("assets/test")
+    luaunit.assertEquals(#self.sprite.imagetable, #imagetable)
+end
+
 function TestInit:tearDown()
     self.sprite = nil
 end

@@ -15,7 +15,7 @@ local function emptyFunc()end
 
 class("AnimatedSprite").extends(gfx.sprite)
 
----@param imagetable table
+---@param imagetable table|string actual imagetable or path
 ---@param states? table If provided, calls `setStates(states)` after initialisation
 ---@param animate? boolean If `True`, then the animation of default state will start after initialisation. Default: `False`
 function AnimatedSprite.new(imagetable, states, animate)
@@ -26,6 +26,9 @@ function AnimatedSprite:init(imagetable, states, animate)
 	AnimatedSprite.super.init(self)
 
 	---@type table
+	if (type(imagetable) == "string") then
+		imagetable = gfx.imagetable.new(imagetable)
+	end
 	self.imagetable = imagetable
 	assert(self.imagetable, "Imagetable is nil. Check if it was loaded correctly.")
 
