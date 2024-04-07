@@ -474,30 +474,28 @@ function AnimatedSprite:update()
 	self:updateAnimation()
 end
 
---Extra helper functions by @debugchicken
+--Extra helper functions
 
----Changes the tick step, aka speed of an animation dynamically, good for animations like a spinning top which changes intensity
----@param stateName string
----@param newTickStep integer
-function AnimatedSprite:updateStateTickStep(stateName, newTickStep)
-	self.states[stateName].tickStep = newTickStep
+--Gets a state by name, so data like tick step can be changed dinamically, for example, in the situation of changing the speed of a spinning top
+---@return table
+function AnimatedSprite:getState(name)
+	return self.states[name]
 end
 
----Get the current index in the array animation (aka, 1,2,3,n, where n = number of frames). good for starting another animation of same size from the same position of this animation
----@return integer
-function AnimatedSprite:getCurrentFrameIndexInAnimationArray()
-	return self.currentFrame - self.states[self.currentState].firstFrameIndex
-end
-
----Changes the animationStartingFrame, good for changing at which frame the animation starts dynamically. ps. index in the array animation (aka, 1,2,3,n, where n = number of frames)
----@param stateName string
----@param newStartingFrame integer
-function AnimatedSprite:updateAnimationStartingFrame(stateName, newStartingFrame)
-	self.states[stateName].animationStartingFrame = newStartingFrame
+--gets the current state
+---@return table
+function AnimatedSprite:getCurrentState()
+	return self.states[self.currentState]
 end
 
 ---gets the name of the current state, saves you having to keep track of it manually
 ---@return string
 function AnimatedSprite:getCurrentStateName()
 	return self.currentState
+end
+
+---Get the current index in the array animation (aka, 1,2,3,n, where n = number of frames). good for starting another animation of same size from the same position of this animation
+---@return integer
+function AnimatedSprite:getCurrentFrameIndexInAnimationArray()
+	return self.currentFrame - self.states[self.currentState].firstFrameIndex
 end
