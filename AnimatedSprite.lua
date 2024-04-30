@@ -492,7 +492,7 @@ function AnimatedSprite:getCurrentStateName()
 	return self.currentState
 end
 
----Get the current index in the array animation (aka, 1,2,3,n, where n = number of frames). good for starting another animation of same size from the same position of this animation
+---Get the current frame's local index in the state (i.e. 1, 2, 3, n. where n = number of frames in this state)
 ---@return integer
 function AnimatedSprite:getCurrentFrameLocalIndex()
 	return self.currentFrame - self.states[self.currentState].firstFrameIndex
