@@ -473,3 +473,15 @@ end
 function AnimatedSprite:update()
 	self:updateAnimation()
 end
+
+---Get the current state
+---@return table state Reference to the current state
+function AnimatedSprite:getCurrentState()
+	return self.states[self.currentState]
+end
+
+---Get the current frame's local index in the state (i.e. 1, 2, 3, n. where n = number of frames in this state)
+---@return integer
+function AnimatedSprite:getCurrentFrameLocalIndex()
+	return self.currentFrame - self.states[self.currentState].firstFrameIndex
+end
