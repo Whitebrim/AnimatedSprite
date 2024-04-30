@@ -328,6 +328,29 @@ function AnimatedSprite:changeState(name, play)
 	end
 end
 
+---Change current state to an existing state and start from selected frame  
+---If new state is the same as current state, nothing will change
+---@param name string New state name
+---@param frameIndex integer Local frame index of this state. Indexing starts from 1. Default: `1`
+---@param play? boolean If new animation should be played right away. Default: `True`
+function AnimatedSprite:changeStateAndSelectFrame(name, frameIndex, play)
+	if (name == self.currentState) then
+		return
+	end
+	play = type(play) == "nil" and true or play
+	frameIndex = frameIndex or 1
+	local state = self.states[name]
+	assert (state, "There's no state named \""..name.."\".")
+	self.currentState = name
+	self._currentFrame = state.firstFrameIndex + frameIndex - 1
+	self._loopsFinished = 0
+	self._currentYoyoDirection = true
+	state.onStateChangedEvent(self)
+	if (play) then
+		self:playAnimation()
+	end
+end
+
 ---Force animation state machine to switch to the next state
 ---@param instant? boolean If `False` change will be performed after the final frame of this loop iteration. Default: `True`
 ---@param state? string Name of the state to change to. If not provided, animator will try to change to the next animation, else stop the animation

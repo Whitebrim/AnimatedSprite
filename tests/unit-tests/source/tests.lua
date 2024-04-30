@@ -323,6 +323,20 @@ function TestAnimation:test4()
     TestAnimation:proceedAnimation("random", 1, 3, 3)
 end
 
+function TestAnimation:test5()
+    self.sprite:changeStateAndSelectFrame("random", 5)
+    --[1, 2, 3, 7, 8 <-start here, 13, 14, 15]
+    TestAnimation:proceedAnimation("random", 8, 0, 3)
+    TestAnimation:proceedAnimation("random", 13, 0, 3)
+    TestAnimation:proceedAnimation("random", 14, 0, 3)
+    TestAnimation:proceedAnimation("random", 15, 1, 3)
+    TestAnimation:proceedAnimation("random", 1, 1, 3)
+    TestAnimation:proceedAnimation("random", 2, 1, 3)
+    TestAnimation:proceedAnimation("random", 3, 1, 3)
+    TestAnimation:proceedAnimation("random", 7, 1, 3)
+    TestAnimation:proceedAnimation("random", 8, 1, 3)
+end
+
 function TestAnimation:tearDown()
     self.sprite = nil
 end

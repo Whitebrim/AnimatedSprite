@@ -1,1 +1,3 @@
 **/.vscode
+/tests/unit-tests/builds
+/tests/benchmark/builds
