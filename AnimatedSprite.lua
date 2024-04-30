@@ -139,8 +139,8 @@ function AnimatedSprite:toggleAnimation()
 	end
 end
 
----Stop and reset the animation
----After calling `playAnimation` `defaulState` will be played
+---Stop and reset the animation  
+---After calling `playAnimation` the animation will start from `defaultState` 
 function AnimatedSprite:stopAnimation()
 	self:pauseAnimation()
 	self.currentState = nil
@@ -206,8 +206,8 @@ function AnimatedSprite.loadStates(path)
 	return assert(json.decodeFile(path), "Requested JSON parse failed. Path: " .. path)
 end
 
----Returns imagetable frame index that is currently displayed
----@return integer Current frame index
+---Get imagetable's frame index that is currently displayed
+---@return integer index Current frame index
 function AnimatedSprite:getCurrentFrameIndex()
 	if (self.currentState and self.states[self.currentState].frames) then
 		return self.states[self.currentState].frames[self._currentFrame]
@@ -216,19 +216,33 @@ function AnimatedSprite:getCurrentFrameIndex()
 	end
 end
 
----Returns reference to the current states
+---Get the current frame's local index in the state  
+---I.e. 1, 2, 3, N, where N = number of frames in this state  
+---Also works if `frames` property was provided
+---@return integer index Current frame local index
+function AnimatedSprite:getCurrentFrameLocalIndex()
+	return self.currentFrame - self.states[self.currentState].firstFrameIndex
+end
+
+---Get reference to the current state
+---@return table state Reference to the current state
+function AnimatedSprite:getCurrentState()
+	return self.states[self.currentState]
+end
+
+---Get reference to the current states
 ---@return table states Reference to the current states
 function AnimatedSprite:getLocalStates()
 	return self.states
 end
 
----Copies states
+---Get copy of the states
 ---@return table states Deepcopy of the current states
 function AnimatedSprite:copyLocalStates()
 	return table.deepcopy(self.states)
 end
 
----All states from the `states` will be added to the current state machine (overwrites values in case of conflict)
+---Add all states from the `states` to the current state machine (overwrites values in case of conflicts)
 ---@param states table State machine state list, you can get one by calling `loadStates`
 ---@param animate? boolean If `True`, then the animation of default/current state will start immediately after. Default: `False`
 ---@param defaultState? string If provided, changes default state
@@ -268,7 +282,7 @@ function AnimatedSprite:setStates(states, animate, defaultState)
 	end
 end
 
----You can add new states to the state machine using this function
+---Add new state to the state machine
 ---@param name string Name of the state, should be unique, used as id
 ---@param startFrame? integer Index of the first frame in the imagetable (starts from 1). Default: `1` (from states.default)
 ---@param endFrame? integer Index of the last frame in the imagetable. Default: last frame (from states.default)
@@ -294,7 +308,7 @@ function AnimatedSprite:addState(name, startFrame, endFrame, params, animate)
 	}
 end
 
----Changes current state to an existing state
+---Change current state to an existing state
 ---@param name string New state name
 ---@param play? boolean If new animation should be played right away. Default: `True`
 function AnimatedSprite:changeState(name, play)
@@ -314,9 +328,9 @@ function AnimatedSprite:changeState(name, play)
 	end
 end
 
----Force to move animation state machine to the next state
+---Force animation state machine to switch to the next state
 ---@param instant? boolean If `False` change will be performed after the final frame of this loop iteration. Default: `True`
----@param state? string Name of the state to change to. If not provided, animator will try to change to the next animation, else stop the animation.
+---@param state? string Name of the state to change to. If not provided, animator will try to change to the next animation, else stop the animation
 function AnimatedSprite:forceNextAnimation(instant, state)
 	instant = type(instant) == "nil" and true or instant
 	local currentState = self.states[self.currentState]
@@ -340,19 +354,19 @@ function AnimatedSprite:forceNextAnimation(instant, state)
 	end
 end
 
----Sets default state.
+---Set default state
 ---@param name string Name of an existing state
 function AnimatedSprite:setDefaultState(name)
 	assert (self.states[name], "State name is nil.")
 	self.defaultState = name
 end
 
----Print all states from this state machine table to the console
+---Print all states from this state machine to the console for debug purposes
 function AnimatedSprite:printAllStates()
 	printTable(self.states)
 end
 
----Function that will procees the animation to the next step without redrawing sprite
+---Procees the animation to the next step without redrawing the sprite
 local function processAnimation(self)
 	local state = self.states[self.currentState]
 
@@ -472,16 +486,4 @@ end
 
 function AnimatedSprite:update()
 	self:updateAnimation()
-end
-
----Get the current state
----@return table state Reference to the current state
-function AnimatedSprite:getCurrentState()
-	return self.states[self.currentState]
-end
-
----Get the current frame's local index in the state (i.e. 1, 2, 3, n. where n = number of frames in this state)
----@return integer
-function AnimatedSprite:getCurrentFrameLocalIndex()
-	return self.currentFrame - self.states[self.currentState].firstFrameIndex
 end
