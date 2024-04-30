@@ -486,12 +486,6 @@ function AnimatedSprite:getCurrentState()
 	return self.states[self.currentState]
 end
 
----gets the name of the current state, saves you having to keep track of it manually
----@return string
-function AnimatedSprite:getCurrentStateName()
-	return self.currentState
-end
-
 ---Get the current frame's local index in the state (i.e. 1, 2, 3, n. where n = number of frames in this state)
 ---@return integer
 function AnimatedSprite:getCurrentFrameLocalIndex()
