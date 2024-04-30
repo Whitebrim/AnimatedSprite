@@ -480,8 +480,8 @@ function AnimatedSprite:getState(name)
 	return self.states[name]
 end
 
---gets the current state
----@return table
+---Get the current state
+---@return table state Reference to the current state
 function AnimatedSprite:getCurrentState()
 	return self.states[self.currentState]
 end
