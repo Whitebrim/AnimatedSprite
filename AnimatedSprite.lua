@@ -474,12 +474,6 @@ function AnimatedSprite:update()
 	self:updateAnimation()
 end
 
---Gets a state by name, so data like tick step can be changed dinamically, for example, in the situation of changing the speed of a spinning top
----@return table
-function AnimatedSprite:getState(name)
-	return self.states[name]
-end
-
 ---Get the current state
 ---@return table state Reference to the current state
 function AnimatedSprite:getCurrentState()
