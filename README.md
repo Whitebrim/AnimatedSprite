@@ -66,11 +66,11 @@ sprite:playAnimation()
 
 <!----------------------------------------------------------------------------->
 
-[Telegram]: https://tg.brim.ml
+[Telegram]: https://tg.brim.su
 [Playdate]: https://play.date/
 [Discord]: https://discordapp.com/users/241961053578199040
 [Wiki]: https://github.com/Whitebrim/AnimatedSprite/wiki
-[Mail]: mailto:white@brim.ml
+[Mail]: mailto:dev@brim.su
 
 [Performance]: Documentation/Performance.md
 [Install]: Documentation/Installation.md
@@ -90,6 +90,6 @@ sprite:playAnimation()
 
 
 [Button Telegram]: https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logoColor=white&logo=Telegram
-[Button Discord]: https://img.shields.io/badge/-Whitebrim%231111-5865F2?style=for-the-badge&logoColor=white&logo=Discord
+[Button Discord]: https://img.shields.io/badge/%40brim__-5865F3?style=for-the-badge&logoColor=white&logo=Discord
 [Button Mail]: https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logoColor=white&logo=Gmail
 
