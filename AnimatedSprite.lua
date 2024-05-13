@@ -221,7 +221,7 @@ end
 ---Also works if `frames` property was provided
 ---@return integer index Current frame local index
 function AnimatedSprite:getCurrentFrameLocalIndex()
-	return self.currentFrame - self.states[self.currentState].firstFrameIndex
+	return self.currentFrame - self.states[self.currentState].firstFrameIndex + 1
 end
 
 ---Get reference to the current state
