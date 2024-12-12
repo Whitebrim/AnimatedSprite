@@ -127,7 +127,9 @@ end
 
 ---Play the animation without resetting
 function AnimatedSprite:resumeAnimation()
-	self._enabled = true
+	if self.currentState ~= nil then
+		self._enabled = true
+	end
 end
 
 ---Play/Pause animation based on current state
