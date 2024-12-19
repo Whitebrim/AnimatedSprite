@@ -177,11 +177,7 @@ local function addState(self, params)
 	end
 	state["framesCount"] = params.framesCount and params.framesCount or (self.states.default.framesCount - state.firstFrameIndex + 1) -- This state frames count
 	state["nextAnimation"] = params.nextAnimation -- Animation to switch to after this finishes
-	if (params.nextAnimation == nil) then
-		state["loop"] = params.loop -- You can put in number of loops or true for endless loop
-	else
-		state["loop"] = params.loop or false
-	end
+	state["loop"] = params.loop or false -- You can put in number of loops or true for endless loop
 	state["reverse"] = params.reverse -- You can reverse animation sequence
 	state["animationStartingFrame"] = params.animationStartingFrame or (state.reverse and state.framesCount or 1) -- Frame to start the animation from
 	state["tickStep"] = params.tickStep -- Speed of animation (2 = every second frame)
