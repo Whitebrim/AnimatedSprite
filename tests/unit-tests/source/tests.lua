@@ -21,6 +21,8 @@ function TestInit:jsonTests()
 			yScale = 1,
 			nextAnimation = nil,
 			onFrameChangedEvent = emptyFunc,
+			onFrameCollisionEvent = emptyFunc,
+			onFrameSfxEvent = emptyFunc,
 			onStateChangedEvent = emptyFunc,
 			onLoopFinishedEvent = emptyFunc,
 			onAnimationEndEvent = emptyFunc
@@ -88,7 +90,9 @@ function TestInit:jsonTests()
             animationStartingFrame = 1,
             firstFrameIndex = 1,
             frames = {1, 2, 3, 7, 8, 13, 14, 15},
-            framesCount = 8
+            framesCount = 8,
+            collisionFrames = {3, 7, 8},
+            sfxFrames = {3}
         }
     }
 
@@ -229,6 +233,10 @@ function TestInit:test10()
     luaunit.assertEquals(#self.sprite.imagetable, #imagetable)
 end
 
+function TestInit:test11()
+    self.sprite = AnimatedSprite.new("assets/test")
+end
+
 function TestInit:tearDown()
     self.sprite = nil
 end
@@ -337,6 +345,36 @@ function TestAnimation:test5()
     TestAnimation:proceedAnimation("random", 8, 1, 3)
 end
 
+function TestAnimation:test11()
+
+    self.sprite.onFrameCollisionEvent = function (aniSprite)
+        print("onFrameCollisionEvent " .. aniSprite._currentFrame)
+        luaunit.assertNotIsNil(aniSprite.currentstate.collisionFrames)
+    end
+
+    self.sprite.onFrameSfxEvent = function (aniSprite)
+        print("onFrameSfxEvent " .. aniSprite._currentFrame)
+        luaunit.assertNotIsNil(aniSprite.currentstate.sfxFrames)
+    end
+
+    self.sprite:changeState("random", true)
+
+    luaunit.assertNotIsNil(self.sprite.states[self.sprite.currentState].collisionFrames)
+    luaunit.assertNotIsNil(self.sprite.states[self.sprite.currentState].sfxFrames)
+
+
+    --[1, 2, 3, 7, 8, 13, 14, 15]
+    -- TestAnimation:proceedAnimation("random", 1, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 2, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 3, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 7, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 8, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 13, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 14, 0, 3)
+    -- TestAnimation:proceedAnimation("random", 15, 1, 3)
+end
+
+
 function TestAnimation:tearDown()
     self.sprite = nil
 end
@@ -351,11 +389,15 @@ function TestEvents:setUp()
         loop = 2,
         nextAnimation = "second",
         onFrameChangedEvent = function() output = output.."F" end,
+        onFrameCollisionEvent = function() output = output.."C" end,
+        onFrameSfxEvent = function() output = output.."X" end,
         onStateChangedEvent = function() output = output.."S" end,
         onLoopFinishedEvent = function() output = output.."L" end,
         onAnimationEndEvent = function() output = output.."A" end})
     self.sprite:addState("second", 5, 4, {
         onFrameChangedEvent = function() output = output.."f" end,
+        onFrameCollisionEvent = function() output = output.."c" end,
+        onFrameSfxEvent = function() output = output.."x" end,
         onStateChangedEvent = function() output = output.."s" end,
         onLoopFinishedEvent = function() output = output.."l" end,
         onAnimationEndEvent = function() output = output.."a" end})
@@ -374,5 +416,5 @@ function TestEvents:test1()
 end
 
 function TestEvents:tearDown()
-    self.sprite = nil
+   self.sprite = nil
 end

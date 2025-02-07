@@ -53,6 +53,8 @@
 	},
 	{
 		"name":"random",
-        "frames": [1, 2, 3, 7, 8, 13, 14, 15]
+		"frames": [1, 2, 3, 7, 8, 13, 14, 15],
+		"collisionFrames": [3, 7, 8],
+		"sfxFrames": [3]
 	}
 ]
