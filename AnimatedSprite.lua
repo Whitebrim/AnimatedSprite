@@ -93,6 +93,33 @@ local function setImage(self)
 	end
 end
 
+
+local function isInTable(t, valueToCheck)
+  for index, value in ipairs(t) do
+    if (value == valueToCheck) then
+      return true
+    end
+  end
+
+  return false
+end
+
+
+local function checkMarkedFrames(self, state, markedFrames, callback)
+	if (markedFrames == nil or state.frames == nil
+	or markedFrames == nil or callback == nil) then
+		return
+	end
+
+	local actualAnimationFrameNumber = state.frames[self._currentFrame]
+	local isMarkedFrame = isInTable(markedFrames, actualAnimationFrameNumber)
+
+	if (isMarkedFrame) then
+		callback(self)
+	end
+end
+
+
 ---Start/resume the animation  
 ---If `currentState` is nil then `defaultState` will be choosen as current
 function AnimatedSprite:playAnimation()
@@ -120,6 +147,9 @@ function AnimatedSprite:playAnimation()
 	else
 		state.onFrameChangedEvent(self)
 	end
+	checkMarkedFrames(self, state, state.collisionFrames, state.onFrameCollisionEvent)
+	checkMarkedFrames(self, state, state.sfxFrames, state.onFrameSfxEvent)
+
 end
 
 ---Stop the animation without resetting
@@ -397,31 +427,6 @@ end
 ---Print all states from this state machine to the console for debug purposes
 function AnimatedSprite:printAllStates()
 	printTable(self.states)
-end
-
-local function isInTable(t, valueToCheck)
-  for index, value in ipairs(t) do
-    if (value == valueToCheck) then
-      return true
-    end
-  end
-
-  return false
-end
-
-
-local function checkMarkedFrames(self, state, markedFrames, callback)
-	if (markedFrames == nil or state.frames == nil
-	or markedFrames == nil or callback == nil) then
-		return
-	end
-
-	local actualAnimationFrameNumber = state.frames[self._currentFrame]
-	local isMarkedFrame = isInTable(markedFrames, actualAnimationFrameNumber)
-
-	if (isMarkedFrame) then
-		callback(self)
-	end
 end
 
 ---Procees the animation to the next step without redrawing the sprite
