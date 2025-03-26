@@ -2,7 +2,7 @@
 --- Sprite class extension with support of  ---
 --- imagetables and finite state machine,   ---
 --- with json configuration and autoplay.   ---
----            By @Whitebrim   git.brim.ml  ---
+---                          By @Whitebrim  ---
 -----------------------------------------------
 
 -- You can find examples and docs at https://github.com/Whitebrim/AnimatedSprite/wiki
@@ -159,7 +159,9 @@ end
 
 ---Play the animation without resetting
 function AnimatedSprite:resumeAnimation()
-	self._enabled = true
+	if self.currentState ~= nil then
+		self._enabled = true
+	end
 end
 
 ---Play/Pause animation based on current state
