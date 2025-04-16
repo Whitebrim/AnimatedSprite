@@ -55,6 +55,8 @@ function AnimatedSprite:init(imagetable, states, animate)
 			nextAnimation = nil,
 
 			onFrameChangedEvent = emptyFunc,
+			onFrameCollisionEvent = emptyFunc,
+			onFrameSfxEvent = emptyFunc,
 			onStateChangedEvent = emptyFunc,
 			onLoopFinishedEvent = emptyFunc,
 			onAnimationEndEvent = emptyFunc
@@ -91,6 +93,33 @@ local function setImage(self)
 	end
 end
 
+
+local function isInTable(t, valueToCheck)
+  for index, value in ipairs(t) do
+    if (value == valueToCheck) then
+      return true
+    end
+  end
+
+  return false
+end
+
+
+local function checkMarkedFrames(self, state, markedFrames, callback)
+	if (markedFrames == nil or state.frames == nil
+	or markedFrames == nil or callback == nil) then
+		return
+	end
+
+	local actualAnimationFrameNumber = state.frames[self._currentFrame]
+	local isMarkedFrame = isInTable(markedFrames, actualAnimationFrameNumber)
+
+	if (isMarkedFrame) then
+		callback(self)
+	end
+end
+
+
 ---Start/resume the animation  
 ---If `currentState` is nil then `defaultState` will be choosen as current
 function AnimatedSprite:playAnimation()
@@ -118,6 +147,9 @@ function AnimatedSprite:playAnimation()
 	else
 		state.onFrameChangedEvent(self)
 	end
+	checkMarkedFrames(self, state, state.collisionFrames, state.onFrameCollisionEvent)
+	checkMarkedFrames(self, state, state.sfxFrames, state.onFrameSfxEvent)
+
 end
 
 ---Stop the animation without resetting
@@ -171,6 +203,12 @@ local function addState(self, params)
 		params.firstFrameIndex = 1
 		params.framesCount = #params.frames
 	end
+	if (params.collisionFrames ~= nil) then
+		state["collisionFrames"] = params.collisionFrames -- Frames when the collision callback is called
+	end
+	if (params.sfxFrames ~= nil) then
+		state["sfxFrames"] = params.sfxFrames -- Frames when the sfx callback is called
+	end
 	if (type(params.firstFrameIndex) == "string") then
 		local thatState = self.states[params.firstFrameIndex]
 		state["firstFrameIndex"] = thatState.firstFrameIndex + thatState.framesCount
@@ -193,6 +231,8 @@ local function addState(self, params)
 	state["xScale"] = params.xScale -- Optional scale for horizontal axis
 	state["yScale"] = params.yScale -- Optional scale for vertical axis
 
+	state["onFrameCollisionEvent"] = params.onFrameCollisionEvent -- Event that will be raised when animation moves to the next frame
+	state["onFrameSfxEvent"] = params.onFrameSfxEvent -- Event that will be raised when animation moves to the next frame
 	state["onFrameChangedEvent"] = params.onFrameChangedEvent -- Event that will be raised when animation moves to the next frame
 	state["onStateChangedEvent"] = params.onStateChangedEvent -- Event that will be raised when animation state changes
 	state["onLoopFinishedEvent"] = params.onLoopFinishedEvent -- Event that will be raised when animation changes to the final frame
@@ -399,6 +439,8 @@ local function processAnimation(self)
 		value += state.firstFrameIndex
 		self._currentFrame = value
 		state.onFrameChangedEvent(self)
+		checkMarkedFrames(self, state, state.collisionFrames, state.onFrameCollisionEvent)
+		checkMarkedFrames(self, state, state.sfxFrames, state.onFrameSfxEvent)
 	end
 
 	local reverse = state.reverse
@@ -412,9 +454,13 @@ local function processAnimation(self)
 			self._loopsFinished += 1
 			state.onFrameChangedEvent(self)
 			state.onLoopFinishedEvent(self)
+			checkMarkedFrames(self, state, state.collisionFrames, state.onFrameCollisionEvent)
+			checkMarkedFrames(self, state, state.sfxFrames, state.onFrameSfxEvent)
 			return
 		else
 			state.onFrameChangedEvent(self)
+			checkMarkedFrames(self, state, state.collisionFrames, state.onFrameCollisionEvent)
+			checkMarkedFrames(self, state, state.sfxFrames, state.onFrameSfxEvent)
 		end
 		setImage(self)
 		return
@@ -424,6 +470,8 @@ local function processAnimation(self)
 		self._loopsFinished += 1
 		state.onFrameChangedEvent(self)
 		state.onLoopFinishedEvent(self)
+		checkMarkedFrames(self, state, state.collisionFrames, state.onFrameCollisionEvent)
+		checkMarkedFrames(self, state, state.sfxFrames, state.onFrameSfxEvent)
 		return
 	end
 
